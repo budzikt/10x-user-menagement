@@ -63,28 +63,39 @@ export default function Avatar({
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center gap-4">
       {avatarUrl ? (
-        <Image
-          width={size}
-          height={size}
-          src={avatarUrl}
-          alt="Avatar"
-          className="avatar image"
-          style={{ height: size, width: size }}
-        />
+        <div className="relative overflow-hidden rounded-full border-4 border-gray-800 shadow-xl" style={{ width: size, height: size }}>
+          <Image
+            fill
+            src={avatarUrl}
+            alt="Avatar"
+            className="object-cover"
+          />
+        </div>
       ) : (
-        <div className="avatar no-image" style={{ height: size, width: size }} />
+        <div 
+          className="bg-gray-800 rounded-full border-4 border-gray-700 flex items-center justify-center text-gray-500 shadow-inner" 
+          style={{ height: size, width: size }}
+        >
+          <span className="text-4xl">?</span>
+        </div>
       )}
-      <div style={{ width: size }}>
-        <label className="button primary block" htmlFor="single">
-          {uploading ? 'Uploading ...' : 'Upload'}
+      <div className="w-full">
+        <label 
+          className={`
+            block w-full text-center px-4 py-2 rounded-lg cursor-pointer transition-all
+            ${uploading 
+              ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
+              : 'bg-brand text-white hover:bg-brand-hover hover:shadow-lg'
+            }
+          `}
+          htmlFor="single"
+        >
+          {uploading ? 'Uploading ...' : 'Upload Avatar'}
         </label>
         <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
+          className="hidden"
           type="file"
           id="single"
           accept="image/*"

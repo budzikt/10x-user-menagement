@@ -75,61 +75,79 @@ export default function AccountForm({ user }: { user: User | null }) {
   }
 
   return (
-    <div className="form-widget">
-      <Avatar
-        uid={user?.id ?? null}
-        url={avatar_url}
-        size={150}
-        onUpload={(url) => {
-          setAvatarUrl(url)
-          updateProfile({ fullname, username, website, avatar_url: url })
-        }}
-      />
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={user?.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="fullName">Full Name</label>
-        <input
-          id="fullName"
-          type="text"
-          value={fullname || ''}
-          onChange={(e) => setFullname(e.target.value)}
+    <div className="w-full max-w-md p-8 bg-bg-surface rounded-xl shadow-2xl border border-gray-800 space-y-6">
+      <div className="flex justify-center">
+        <Avatar
+          uid={user?.id ?? null}
+          url={avatar_url}
+          size={150}
+          onUpload={(url) => {
+            setAvatarUrl(url)
+            updateProfile({ fullname, username, website, avatar_url: url })
+          }}
         />
       </div>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="url"
-          value={website || ''}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
+      
+      <div className="space-y-4">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email" className="text-sm font-medium text-gray-400">Email</label>
+          <input 
+            id="email" 
+            type="text" 
+            value={user?.email} 
+            disabled 
+            className="w-full px-4 py-2 bg-black/30 border border-gray-800 rounded-lg text-gray-500 cursor-not-allowed"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="fullName" className="text-sm font-medium text-gray-400">Full Name</label>
+          <input
+            id="fullName"
+            type="text"
+            value={fullname || ''}
+            onChange={(e) => setFullname(e.target.value)}
+            className="w-full px-4 py-2 bg-black/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition-all text-white"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="username" className="text-sm font-medium text-gray-400">Username</label>
+          <input
+            id="username"
+            type="text"
+            value={username || ''}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full px-4 py-2 bg-black/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition-all text-white"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="website" className="text-sm font-medium text-gray-400">Website</label>
+          <input
+            id="website"
+            type="url"
+            value={website || ''}
+            onChange={(e) => setWebsite(e.target.value)}
+            className="w-full px-4 py-2 bg-black/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-brand focus:border-transparent outline-none transition-all text-white"
+          />
+        </div>
       </div>
 
-      <div>
+      <div className="space-y-3 pt-4 border-t border-gray-800">
         <button
-          className="button primary block"
+          className="w-full px-4 py-2 bg-brand text-white font-medium rounded-lg hover:bg-brand-hover transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={() => updateProfile({ fullname, username, website, avatar_url })}
           disabled={loading}
         >
-          {loading ? 'Loading ...' : 'Update'}
+          {loading ? 'Loading ...' : 'Update Profile'}
         </button>
-      </div>
 
-      <div>
         <form action="/auth/signout" method="post">
-          <button className="button block" type="submit">
+          <button 
+            className="w-full px-4 py-2 bg-transparent border border-gray-700 text-gray-300 font-medium rounded-lg hover:bg-gray-800 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:ring-offset-gray-900" 
+            type="submit"
+          >
             Sign out
           </button>
         </form>
