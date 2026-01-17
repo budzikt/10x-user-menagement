@@ -12,12 +12,18 @@ export default function Home() {
           profile and upload an avatar image. Fast, simple, secure.
         </p>
       </div>
-      <div>
+      <div className="flex gap-4">
         <Link 
           href="/login"
           className="rounded-md bg-brand px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-brand-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
         >
           Go to Auth page
+        </Link>
+        <Link 
+          href="/profiles"
+          className="rounded-md bg-gray-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600 transition-colors"
+        >
+          View profiles
         </Link>
       </div>
     </div>
